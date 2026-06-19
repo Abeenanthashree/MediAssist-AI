@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MediAssist AI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+overflow-x:hidden;
+background:#0f172a;
+color:white;
+transition:.4s;
+}
+
+body.light{
+background:#f4f7fc;
+color:#111;
+}
+
+/* Loader */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.loader-circle{
+width:80px;
+height:80px;
+border:8px solid #333;
+border-top:8px solid #00e5ff;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+/* Floating Icons */
+
+.float{
+position:fixed;
+font-size:40px;
+opacity:.3;
+animation:float 6s infinite ease-in-out;
+}
+
+.f1{top:10%;left:5%;}
+.f2{top:30%;right:8%;}
+.f3{bottom:20%;left:10%;}
+.f4{bottom:15%;right:10%;}
+
+@keyframes float{
+50%{
+transform:translateY(-25px);
+}
+}
+
+/* Navbar */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(10px);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+font-size:30px;
+font-weight:700;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+}
+
+nav ul li{
+margin-left:25px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+}
+
+.toggle{
+cursor:pointer;
+font-size:25px;
+}
+
+/* Hero */
+
+.hero{
+position:relative;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+}
+
+.hero video{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+z-index:-1;
+}
+
+.hero-content{
+max-width:800px;
+}
+
+.hero h1{
+font-size:70px;
+}
+
+.hero p{
+font-size:22px;
+margin:20px 0;
+}
+
+.btn{
+padding:15px 35px;
+border:none;
+border-radius:30px;
+background:#00e5ff;
+color:#000;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* Glass Cards */
+
+.cards{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+padding:80px 20px;
+}
+
+.card{
+width:280px;
+padding:30px;
+background:rgba(255,255,255,.1);
+backdrop-filter:blur(15px);
+border-radius:25px;
+text-align:center;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card i{
+font-size:50px;
+margin-bottom:15px;
+color:#00e5ff;
+}
+
+/* Counter */
+
+.stats{
+display:flex;
+justify-content:center;
+gap:80px;
+padding:50px;
+flex-wrap:wrap;
+}
+
+.stat{
+text-align:center;
+}
+
+.stat h2{
+font-size:55px;
+color:#00e5ff;
+}
+
+/* Voice Button */
+
+.voice{
+position:fixed;
+bottom:30px;
+right:30px;
+width:70px;
+height:70px;
+border-radius:50%;
+border:none;
+background:#ff006e;
+color:white;
+font-size:28px;
+cursor:pointer;
+box-shadow:0 0 25px rgba(255,0,110,.7);
+}
+
+/* Lottie */
+
+.lottie{
+display:flex;
+justify-content:center;
+padding:50px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loader">
+<div class="loader-circle"></div>
+</div>
+
+<!-- Floating Medical Icons -->
+
+<div class="float f1">❤️</div>
+<div class="float f2">🩺</div>
+<div class="float f3">💊</div>
+<div class="float f4">🧬</div>
+
+<nav>
+
+<div class="logo">
+🩺 MediAssist AI
+</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="/login">Login</a></li>
+<li><a href="/register">Register</a></li>
+</ul>
+
+<div class="toggle" onclick="toggleTheme()">
+🌙
+</div>
+
+</nav>
+
+<section class="hero">
+
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-doctor-working-on-a-laptop-1560867742394?download=1080p" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+
+<h1>MediAssist AI</h1>
+
+<h2 id="typing"></h2>
+
+<p>
+AI-powered healthcare assistant for symptom guidance,
+medicine reminders and appointment support.
+</p>
+
+<button class="btn">
+Get Started
+</button>
+
+</div>
+
+</section>
+
+<section class="lottie">
+
+<lottie-player
+src="https://assets2.lottiefiles.com/packages/lf20_q7yxm4lk.json"
+background="transparent"
+speed="1"
+style="width:400px;height:400px"
+loop
+autoplay>
+</lottie-player>
+
+</section>
+
+<section class="cards">
+
+<div class="card" data-aos="fade-up">
+<i class="fas fa-heartbeat"></i>
+<h3>Health Monitoring</h3>
+<p>Track symptoms and wellness.</p>
+</div>
+
+<div class="card" data-aos="fade-up">
+<i class="fas fa-pills"></i>
+<h3>Medicine Reminder</h3>
+<p>Never miss your medication.</p>
+</div>
+
+<div class="card" data-aos="fade-up">
+<i class="fas fa-user-md"></i>
+<h3>Doctor Guidance</h3>
+<p>Get healthcare recommendations.</p>
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stat">
+<h2>10K+</h2>
+<p>Users</p>
+</div>
+
+<div class="stat">
+<h2>95%</h2>
+<p>Accuracy</p>
+</div>
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Support</p>
+</div>
+
+</section>
+
+<button class="voice">
+🎤
+</button>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+
+AOS.init();
+
+window.onload=function(){
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},1500);
+}
+
+function toggleTheme(){
+document.body.classList.toggle("light");
+}
+
+const text="Your Intelligent Healthcare Companion";
+let i=0;
+
+function typing(){
+
+if(i<text.length){
+
+document.getElementById("typing").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typing,80);
+
+}
+
+}
+
+typing();
+
+</script>
+
+</body>
+</html>
