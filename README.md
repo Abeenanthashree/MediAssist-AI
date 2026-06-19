@@ -48,4 +48,5 @@ MediAssist-AI/
 
 ## Author
 
-Biomedical Engineering Student Project
+Abeenanthashree
+
